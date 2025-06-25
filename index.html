@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MEMORIES</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      flex-direction: column;
+      color: white;
+      font-family: sans-serif;
+    }
+    #start-btn {
+      padding: 16px 32px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 8px;
+      background: #ff69b4;
+      color: white;
+      cursor: pointer;
+    }
+    .slideshow {
+      display: none;
+      position: relative;
+      width: 100%;
+      height: 80vh;
+    }
+    .slideshow img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      max-width: 90%;
+      max-height: 90%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      object-fit: contain;
+    }
+    .slideshow img.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <button id="start-btn">Click Here</button>
+  <div class="slideshow" id="slideshow">
+    <!-- Tambahkan nama file gambarmu di bawah -->
+    <img src="gambar1.jpg" alt="Image 1">
+    <img src="gambar2.jpg" alt="Image 2">
+    <img src="gambar3.jpg" alt="Image 3">
+    <img src="gambar4.jpg" alt="Image 4">
+    <img src="gambar5.jpg" alt="Image 5">
+    <img src="gambar6.jpg" alt="Image 6">
+    <img src="gambar7.jpg" alt="Image 7">
+    <img src="gambar8.jpg" alt="Image 8">
+    <img src="gambar9.jpg" alt="Image 9">
+    <!-- Tambah gambar lagi di sini jika perlu -->
+  </div>
+  <audio id="bgm" src="musik.mp3" preload="auto" loop></audio>
+
+  <script>
+    const startBtn = document.getElementById('start-btn');
+    const slideshow = document.getElementById('slideshow');
+    const images = slideshow.querySelectorAll('img');
+    const audio = document.getElementById('bgm');
+
+    startBtn.onclick = () => {
+      startBtn.style.display = 'none';
+      slideshow.style.display = 'block';
+      audio.play().catch(() => {});
+      let index = 0;
+
+      function showNextImage() {
+        if (index > 0) images[index - 1].classList.remove('show');
+        if (index < images.length) {
+          images[index].classList.add('show');
+          index++;
+          setTimeout(showNextImage, 5000);
+        }
+      }
+
+      showNextImage();
+    };
+  </script>
+  <footer style="position: absolute; bottom: 10px; width: 100%; text-align: center; color: #ccc; font-size: 1rem;">
+    a lil bit sweet memories
+  </footer>
+</body>
+</html>
